@@ -1,3 +1,4 @@
+// src/sankeyLinkCircular.js
 // sankeyLinkCircular.js
 //
 // Generates an SVG path that is the CENTERLINE of a link. The link's visible
@@ -12,8 +13,8 @@
 // link.circularPathData.points (computed by the layout). No inner/outer radius
 // math — we round each interior vertex of a single centerline with one radius.
 //
-// debug: set linkPath.debug(true) to also expose helpers via linkPath.points(d)
-// and linkPath.corners(d) for overlay rendering.
+// debug: set linkPath.debug(true) to flag debug mode; linkPath.points(d) exposes
+// the underlying vertex list for overlay rendering (corners + endpoints).
 
 export default function sankeyLinkCircular() {
   let _debug = false;
@@ -55,7 +56,8 @@ export default function sankeyLinkCircular() {
         continue;
       }
 
-      // Clamp the fillet radius to fit both adjacent segments.
+      // Clamp the fillet radius to fit both adjacent segments. This clamp — not
+      // the curve type — is what guarantees the fillet never self-intersects.
       const rr = Math.min(r, len1 / 2, len2 / 2);
 
       const a1x = p1.x + (v1x / len1) * rr;
@@ -64,9 +66,9 @@ export default function sankeyLinkCircular() {
       const a2y = p1.y + (v2y / len2) * rr;
 
       d += `L${a1x},${a1y}`;
-      // arcTo-style quadratic-ish fillet: use the corner as the control point.
-      // A quadratic Bézier through a1 -> (control p1) -> a2 gives a smooth,
-      // robust round that never self-intersects, unlike arcTo with bad radii.
+      // Quadratic fillet using the corner as the control point. A quadratic
+      // Bézier through a1 -> (control p1) -> a2 gives a smooth, robust round —
+      // and unlike SVG arcTo it can't blow up on degenerate radii.
       d += `Q${p1.x},${p1.y} ${a2x},${a2y}`;
     }
     const last = points[points.length - 1];
@@ -90,10 +92,6 @@ export default function sankeyLinkCircular() {
   link.debug = function (_) {
     return arguments.length ? ((_debug = !!_), link) : _debug;
   };
-
-  // Kept for API compatibility (layout owns extents now).
-  link.extent = function () { return link; };
-  link.circularGap = function () { return link; };
 
   return link;
 }
