@@ -1,5 +1,5 @@
-var tape = require("tape"),
-    d3 = require("../");
+import tape from "tape";
+import * as d3 from "../src/index.js";
 
 tape.skip("sankey(energy) returns the expected results", function(test) {
   var sankey = d3.sankey().nodeWidth(15).nodePadding(10).extent([[1, 1], [959, 494]]),

@@ -48,7 +48,8 @@
     "postpublish": "git push && git push --tags"
   },
   "dependencies": {
-    "d3-array": "1 - 2"
+    "d3-array": "1 - 2",
+    "d3-shape": "3.2.0"
   },
   "devDependencies": {
     "eslint": "6",
