@@ -43,12 +43,22 @@ In a browser via importmap (see [`examples/`](./examples)):
 | --------------------- | ---------------------------------- | --------------------------------------------------------------- |
 | Cyclic graphs         | Throws `"circular link"`           | Detects back-edges and routes them as loops                     |
 | Self-loops (`a → a`)  | Not supported                      | Supported                                                       |
-| Link rendering        | Filled ribbon (`sankeyLinkHorizontal`) | Stroked centerline (`sankeyLinkCircular`) — see below      |
+| Link rendering        | Filled ribbon (`sankeyLinkHorizontal`) | Stroked centerline (`sankeyLinkCircular`) — replaces the ribbon generator |
 | Acyclic output        | —                                  | **Byte-for-byte identical** (the original code path is reused)  |
 
 Everything from the original API (`nodeId`, `nodeAlign`, `nodeSort`,
 `nodeWidth`, `nodePadding`, `nodes`, `links`, `linkSort`, `size`, `extent`,
 `iterations`) is preserved unchanged.
+
+## Migrating from d3-sankey
+
+This fork **does not export `sankeyLinkHorizontal`**. Use `sankeyLinkCircular`
+for all links — it renders normal links as stroked centerlines with the same
+shape. Remember the [stroked-centerline rendering model](#rendering-model-stroked-centerlines):
+set `fill: none` and `stroke-width` on your links.
+
+
+
 
 ## Rendering model: stroked centerlines
 
@@ -80,9 +90,12 @@ If you forget `fill: none` or `stroke-width`, your links will render as solid
 black blobs or hairlines. This differs from upstream d3-sankey, where you fill a
 closed ribbon path and never set `stroke-width`.
 
-For normal (acyclic) links the centerline is the same cubic Bézier shape as
-`d3.sankeyLinkHorizontal`, just stroked instead of filled — so the visual
-result matches.
+For normal (acyclic) links the centerline is the same cubic Bézier *shape*
+as upstream d3-sankey's `sankeyLinkHorizontal`, just stroked instead of
+filled — so the visual result matches. (This fork does not export
+`sankeyLinkHorizontal` itself; `sankeyLinkCircular` handles both normal and
+circular links.)
+
 
 ## API reference (additions)
 
