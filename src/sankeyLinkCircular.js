@@ -78,6 +78,7 @@ export default function sankeyLinkCircular() {
 
   function circularPath(d) {
     const p = d.circularPathData;
+    if (!p || !p.points || p.points.length < 2) return normalPath(d);
     return roundedPolyline(p.points, p.radius);
   }
 
