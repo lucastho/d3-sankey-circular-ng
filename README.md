@@ -22,18 +22,18 @@ routing dramatically simpler to compute and draw.
 ## Installing
 
 ```bash
-npm install @yourname/d3-sankey-circular
+npm install @lucastho/d3-sankey-circular
 ```
 
 ```js
-import { sankey, sankeyLinkCircular } from "@yourname/d3-sankey-circular";
+import { sankey, sankeyLinkCircular } from "@lucastho/d3-sankey-circular";
 ```
 
 In a browser via importmap (see [`examples/`](./examples)):
 
 ```html
 <script type="module">
-  import { sankey, sankeyLinkCircular } from "@yourname/d3-sankey-circular";
+  import { sankey, sankeyLinkCircular } from "@lucastho/d3-sankey-circular";
 </script>
 ```
 
