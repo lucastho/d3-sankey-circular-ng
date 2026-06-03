@@ -19,7 +19,7 @@
       "url": "https://bost.ocks.org/mike/"
     }
   ],
-  "license": "BSD-3-Clause",
+  "license": "ISC",
   "type": "module",
   "main": "dist/d3-sankey-circular-ng.js",
   "unpkg": "dist/d3-sankey-circular-ng.min.js",
@@ -48,7 +48,7 @@
     "postpublish": "git push && git push --tags"
   },
   "dependencies": {
-    "d3-array": "1 - 2"
+    "d3-array": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "6",
