@@ -14,9 +14,8 @@ thickness of a link comes entirely from `stroke-width`, which makes circular
 routing dramatically simpler to compute and draw.
 
 > Fork of [d3/d3-sankey](https://github.com/d3/d3-sankey) (ISC).
-> Original work © Mike Bostock. Circular-link additions © (your name).
->Circularity concepts from Tom Shanley's d3-sankey-circular (https://observablehq.com/@tomshanley/sankey-circular-deconstructed) onto the modern codebase.
-> Mostly produced by Claude
+> Original work © Mike Bostock. Circular-link additions © (lucas thompson using claude).
+> Circularity concepts from Tom Shanley's d3-sankey-circular (https://observablehq.com/@tomshanley/sankey-circular-deconstructed)
 
 
 ## Installing
@@ -195,5 +194,5 @@ with a debug overlay (centerline, corner markers, and lane guides).
 ## License
 
 ISC. See [`LICENSE`](./LICENSE). Original d3-sankey © Mike Bostock; circular
-additions © (your name).
+additions © (lucas thompson).
 
